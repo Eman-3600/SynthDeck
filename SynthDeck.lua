@@ -22,9 +22,10 @@ function SMODS.INIT.SynthDeck()
     local sprite_centers = SMODS.Sprite:new("atlassynthdeck", ch_Synth_art.path, "SynthDecks.png", 71, 95, "asset_atli")
     sprite_centers:register()
 
+    -- SYNTHETIC DECK --
     SMODS.Back{
         name = "SynthDeck",
-        key = "synthdeck",
+        key = "b_synthdeck",
         pos = {x = 0, y = 5},
         config = {cards_per_round = 3},
         atlas = "atlassynthdeck",
@@ -97,13 +98,53 @@ function SMODS.INIT.SynthDeck()
                 G.E_MANAGER:add_event(Event({
                     func = function() 
                         G.deck.config.card_limit = G.deck.config.card_limit + 4
-                        return true
-                    end}))
-                    for i = 1,self.config.cards_per_round,1 do
-                        draw_card(G.play,G.deck, 90,'up', nil)
-                    end
 
-                playing_card_joker_effects({true})
+                        for i = 1,self.config.cards_per_round,1 do
+                            draw_card(G.play,G.deck, 90,'up', nil)
+                            playing_card_joker_effects({true})
+                        end
+
+                        return true
+                    end
+                }))
+            end
+
+        end
+    }
+
+    -- TAINTED DECK --
+    SMODS.Back{
+        name = "TaintedDeck",
+        key = "b_tainteddeck",
+        pos = {x = 1, y = 5},
+        config = {joker_slot = -2},
+        atlas = "atlassynthdeck",
+        loc_txt = {
+            name ="Tainted Deck",
+            text={
+                "At end of each Round:",
+                "Create a {C:spectral}Spectral{} Card",
+                "{C:red}-2{} Joker Slots",
+            },
+        },
+        
+        trigger_effect = function(self, args)
+
+            if (args.context == 'eval') and #G.consumeables.cards + G.GAME.consumeable_buffer < G.consumeables.config.card_limit then
+                
+                G.GAME.consumeable_buffer = G.GAME.consumeable_buffer + 1
+                
+                G.E_MANAGER:add_event(Event({
+                    func = (function()
+
+                        local card = create_card('Spectral',G.consumeables, nil, nil, nil, nil, nil, 'sea')
+                        card:add_to_deck()
+                        G.consumeables:emplace(card)
+                        G.GAME.consumeable_buffer = 0
+
+                        return true
+                    end)
+                }))
             end
 
         end
