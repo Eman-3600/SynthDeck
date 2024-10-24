@@ -27,36 +27,26 @@ function SMODS.INIT.SynthDeck()
         name = "SynthDeck",
         key = "b_synthdeck",
         pos = {x = 0, y = 5},
-        config = {cards_per_round = 3},
+        config = {cards_per_round = 2, cards_in_deck = 13, consumables = {'c_aura'}},
         atlas = "atlassynthdeck",
         loc_txt = {
             name ="Synthetic Deck",
             text={
                 "At end of each Round:",
-                "Create 3 playing cards",
-                "Start with 12 {C:attention}Stone cards",
+                "Create {C:attention}2{C:attention} Playing{} Cards",
+                "Start with {C:attention}13{C:attention} Playing{} Cards",
+                "and {C:attention}1{} copy of {C:spectral,T:c_aura}Aura{}",
             },
         },
         apply = function(self)
+
             G.E_MANAGER:add_event(Event({
                 func = function()
 
-                    for k, v in pairs(G.playing_cards) do
-                        if not v:is_face() then
-                            v.to_remove = true
-                        else
-                            v:set_base(pseudorandom_element(G.P_CARDS, pseudoseed('synthbase')))
-                            v:set_ability(G.P_CENTERS.m_stone)
-                        end
-                    end
-                    
-                    local i = 1
-                    while i <= #G.playing_cards do
-                        if G.playing_cards[i].to_remove then
-                            G.playing_cards[i]:remove()
-                        else
-                            i = i + 1
-                        end
+                    while #G.playing_cards > self.config.cards_in_deck do
+                        local i = pseudorandom('synthbase', 1, #G.playing_cards)
+
+                        G.playing_cards[i]:remove()
                     end
 
                     G.GAME.starting_deck_size = #G.playing_cards
@@ -69,6 +59,7 @@ function SMODS.INIT.SynthDeck()
         trigger_effect = function(self, args)
 
             if (args.context == 'eval') then
+
                 G.E_MANAGER:add_event(Event({
                     func = (function()
                         for i = 1,self.config.cards_per_round,1 do
@@ -97,7 +88,7 @@ function SMODS.INIT.SynthDeck()
 
                 G.E_MANAGER:add_event(Event({
                     func = function() 
-                        G.deck.config.card_limit = G.deck.config.card_limit + 4
+                        G.deck.config.card_limit = G.deck.config.card_limit + self.config.cards_per_round
 
                         for i = 1,self.config.cards_per_round,1 do
                             draw_card(G.play,G.deck, 90,'up', nil)
@@ -123,24 +114,22 @@ function SMODS.INIT.SynthDeck()
             name ="Tainted Deck",
             text={
                 "At end of each Round:",
-                "Create a {C:spectral}Spectral{} Card",
-                "{C:red}-2{} Joker Slots",
+                "Create a {C:dark_edition}Negative{} {C:spectral}Spectral{} Card",
+                "{C:red}-2{} Joker slots",
             },
         },
         
         trigger_effect = function(self, args)
 
-            if (args.context == 'eval') and #G.consumeables.cards + G.GAME.consumeable_buffer < G.consumeables.config.card_limit then
-                
-                G.GAME.consumeable_buffer = G.GAME.consumeable_buffer + 1
+            if (args.context == 'eval') then
                 
                 G.E_MANAGER:add_event(Event({
                     func = (function()
 
                         local card = create_card('Spectral',G.consumeables, nil, nil, nil, nil, nil, 'sea')
+                        card:set_edition({negative = true}, true)
                         card:add_to_deck()
                         G.consumeables:emplace(card)
-                        G.GAME.consumeable_buffer = 0
 
                         return true
                     end)
