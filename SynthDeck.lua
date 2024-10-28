@@ -1,8 +1,8 @@
 --- STEAMODDED HEADER
---- MOD_NAME: Synthetic Deck
+--- MOD_NAME: Synthetic Decks
 --- MOD_ID: SynthDeck
 --- MOD_AUTHOR: [Eman3600]
---- MOD_DESCRIPTION: A deck that starts small and grows each round.
+--- MOD_DESCRIPTION: Adds new decks, including one that starts small and grows each round.
 
 ----------------------------------------------
 ------------MOD CODE -------------------------
