@@ -25,7 +25,7 @@ function SMODS.INIT.SynthDeck()
     -- SYNTHETIC DECK --
     SMODS.Back{
         name = "SynthDeck",
-        key = "b_synthdeck",
+        key = "synthdeck",
         pos = {x = 0, y = 5},
         config = {cards_per_round = 2, cards_in_deck = 13, consumables = {'c_aura'}},
         atlas = "atlassynthdeck",
@@ -106,7 +106,7 @@ function SMODS.INIT.SynthDeck()
     -- TAINTED DECK --
     SMODS.Back{
         name = "TaintedDeck",
-        key = "b_tainteddeck",
+        key = "tainteddeck",
         pos = {x = 1, y = 5},
         config = {joker_slot = -2},
         atlas = "atlassynthdeck",
