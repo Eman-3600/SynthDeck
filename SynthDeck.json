@@ -7,7 +7,7 @@
 	"prefix": "synthdecks",
 	"main_file": "SynthDeck.lua",
 	"priority": 0,
-	"version": "0.2.1",
+	"version": "0.3.0",
 	"dependencies": [
 		{
 			"id": "Steamodded",
