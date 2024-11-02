@@ -1,0 +1,17 @@
+{
+	"id": "SynthDeck",
+	"name": "SynthDeck",
+	"display_name": "Synthetic Decks",
+	"author": ["Eman3600"],
+	"description": "Adds new decks, including one that starts small and grows each round.",
+	"prefix": "synthdecks",
+	"main_file": "SynthDeck.lua",
+	"priority": 0,
+	"version": "0.2.1",
+	"dependencies": [
+		{
+			"id": "Steamodded",
+			"min_version": "1.0.0~ALPHA-1030e"
+		}
+	]
+}
