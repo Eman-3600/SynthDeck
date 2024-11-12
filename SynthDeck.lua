@@ -6,6 +6,7 @@ local deck_list = {
     "synth",
     "tainted",
     "greed",
+    "radioactive",
 }
 
 local mod_path = SMODS.current_mod.path

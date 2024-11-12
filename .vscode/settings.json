@@ -10,6 +10,8 @@
         "playing_card_joker_effects",
         "SMODS",
         "sendErrorMessage",
-        "NFS"
+        "NFS",
+        "localize",
+        "copy_card"
     ]
 }
