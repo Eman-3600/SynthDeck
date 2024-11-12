@@ -1,0 +1,15 @@
+{
+    "Lua.diagnostics.globals": [
+        "create_card",
+        "pseudorandom",
+        "pseudoseed",
+        "poll_edition",
+        "G",
+        "Event",
+        "draw_card",
+        "playing_card_joker_effects",
+        "SMODS",
+        "sendErrorMessage",
+        "NFS"
+    ]
+}

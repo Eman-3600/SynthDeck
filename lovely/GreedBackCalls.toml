@@ -1,0 +1,16 @@
+[manifest]
+version = "1.0.0"
+priority = 0
+
+[[patches]]
+[patches.pattern]
+target = "functions/common_events.lua"
+pattern = "G.GAME.dollars = G.GAME.dollars + mod"
+position = "after"
+payload = '''
+if G.GAME.selected_back_key and type(G.GAME.selected_back_key.eman_update_money) == "function" then
+    G.GAME.selected_back_key:eman_update_money(G.GAME.dollars, mod)
+end
+'''
+match_indent = true
+times = 1
