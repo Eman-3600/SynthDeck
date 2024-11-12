@@ -7,6 +7,7 @@ local deck_list = {
     "tainted",
     "greed",
     "radioactive",
+    "speed",
 }
 
 local mod_path = SMODS.current_mod.path

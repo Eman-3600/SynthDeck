@@ -12,6 +12,10 @@
         "sendErrorMessage",
         "NFS",
         "localize",
-        "copy_card"
+        "copy_card",
+        "ease_ante",
+        "add_tag",
+        "play_sound",
+        "Tag"
     ]
 }
