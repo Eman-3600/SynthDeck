@@ -2,13 +2,13 @@ local deck = {
     name = "Radioactive Deck",
     key = "radioactive",
     pos = {x = 3, y = 0},
-    config = {vouchers = {'v_magic_trick','v_illusion', 'v_overstock_norm'}, decay_chance = 8, decay_mult = 15},
+    config = {vouchers = {'v_magic_trick','v_illusion', 'v_overstock_norm'}, decay_chance = 8, decay_dollars = 2},
     atlas = "atlassynthdeck",
     loc_txt = {
         name ="Radioactive Deck",
         text={
             "{C:green}#1# in #2#{} scored cards are",
-            "destroyed to score {C:red}+#6#{} Mult",
+            "destroyed to earn {C:money}$#6#{}",
             "Start with {C:attention,T:v_magic_trick}#3#,",
             "{C:attention,T:v_illusion}#4#, and {C:attention,T:v_overstock_norm}#5#",
         },
@@ -32,7 +32,7 @@ end
 deck.eman_add_card_effect = function (self, card)
     if card.ability.radioactive_decay then
         return {
-            mult = self.config.decay_mult
+            p_dollars = self.config.decay_dollars
         }
     end
 end
@@ -44,7 +44,7 @@ deck.loc_vars = function (self, info_queue, card)
         localize{type = 'name_text', key = 'v_magic_trick', set = 'Voucher'},
         localize{type = 'name_text', key = 'v_illusion', set = 'Voucher'},
         localize{type = 'name_text', key = 'v_overstock_norm', set = 'Voucher'},
-        self.config.decay_mult,
+        self.config.decay_dollars,
     }}
 end
 
