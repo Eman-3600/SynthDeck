@@ -15,25 +15,43 @@ local deck = {
     }
 }
 
-deck.eman_should_destroy = function (self, card)
-    if (card.ability.radioactive_decay) then
-        return true
-    end
+-- deck.eman_should_destroy = function (self, card)
+--     if (card.ability.radioactive_decay) then
+--         return true
+--     end
 
-    -- if (pseudorandom(pseudoseed('radioactive')) < G.GAME.probabilities.normal/self.config.decay_chance) then return true end
-end
+--     -- if (pseudorandom(pseudoseed('radioactive')) < G.GAME.probabilities.normal/self.config.decay_chance) then return true end
+-- end
 
-deck.eman_modify_played_card = function (self, card)
-    if (pseudorandom(pseudoseed('radioactive')) < G.GAME.probabilities.normal/self.config.decay_chance) then
-        card.ability.radioactive_decay = true
-    end
-end
+-- deck.eman_modify_played_card = function (self, card)
+--     if (pseudorandom(pseudoseed('radioactive')) < G.GAME.probabilities.normal/self.config.decay_chance) then
+--         card.ability.radioactive_decay = true
+--     end
+-- end
 
-deck.eman_add_card_effect = function (self, card)
-    if card.ability.radioactive_decay then
-        return {
-            p_dollars = self.config.decay_dollars
-        }
+-- deck.eman_add_card_effect = function (self, card)
+--     if card.ability.radioactive_decay then
+--         return {
+--             p_dollars = self.config.decay_dollars
+--         }
+--     end
+-- end
+
+deck.calculate = function (self, card, context)
+    if (context.individual and context.cardarea == G.play) then
+        if (pseudorandom(pseudoseed('radioactive')) < G.GAME.probabilities.normal/self.config.decay_chance) then
+            context.other_card.ability.radioactive_decay = true
+
+            return {
+                dollars = self.config.decay_dollars
+            }
+        end
+    elseif (context.destroy_card and context.cardarea == G.play) then
+        if (context.destroy_card.ability.radioactive_decay) then
+            return {
+                remove = true
+            }
+        end
     end
 end
 
