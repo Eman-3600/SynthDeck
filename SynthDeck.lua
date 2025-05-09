@@ -29,7 +29,7 @@ for k, v in ipairs(deck_list) do
 
     -- load if present
     if not deck then
-        sendErrorMessage("[ClockBosses] Cannot find deck with shorthand: " .. v)
+        sendErrorMessage("[SynthDeck] Cannot find deck with shorthand: " .. v)
     else
         deck.key = v
         deck.discovered = false

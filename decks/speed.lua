@@ -7,8 +7,8 @@ local deck = {
     loc_txt = {
         name ="Speed Deck",
         text={
-            "Start with all",
-            "{C:attention}Booster Tags{}",
+            "Start with each",
+            "{C:attention}Booster Tag{}",
             "{C:attention}+1{} Ante",
         },
     }

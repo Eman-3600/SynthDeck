@@ -1,0 +1,16 @@
+{
+    "name": "Synthetic Decks",
+    "display_name": "Synth Decks",
+    "id": "SynthDeck",
+    "prefix": "synd",
+    "version": "0.4.0",
+    "website_url": "https://github.com/Eman-3600/SynthDeck",
+    "description": "Adds new decks, including the titular Synthetic Deck, which starts small and grows each round.",
+    "author": ["Eman3600"],
+    "main_file": "SynthDeck.lua",
+    "priority": 0,
+    "badge_colour": "de31c8",
+    "dependencies": [
+        "Steamodded (>=1.0.0~BETA-0506a)"
+    ]
+}
