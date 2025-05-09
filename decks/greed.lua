@@ -2,14 +2,14 @@ local deck = {
     name = "Greed Deck",
     key = "greed",
     pos = {x = 2, y = 0},
-    config = {greed_count = 25, discards = -1},
+    config = {greed_count = 25, consumable_slot = -1},
     atlas = "atlassynthdeck",
     loc_txt = {
         name ="Greed Deck",
         text={
             "Increase hand size by {C:attention}1{}",
             "for every {C:money}$#1#{} you have",
-            "{C:red}-1{} discard every round",
+            "{C:red}-1{} consumable slot",
         },
     }
 }
