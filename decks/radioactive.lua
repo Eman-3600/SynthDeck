@@ -37,10 +37,15 @@ local deck = {
 -- end
 
 deck.calculate = function (self, card, context)
+    if (context.before) then
+        for _, v in ipairs(context.full_hand) do
+            if (pseudorandom(pseudoseed('radioactive')) < G.GAME.probabilities.normal/self.config.decay_chance) then
+                v.ability.radioactive_decay = true
+            end
+        end
+    end
     if (context.individual and context.cardarea == G.play) then
-        if (pseudorandom(pseudoseed('radioactive')) < G.GAME.probabilities.normal/self.config.decay_chance) then
-            context.other_card.ability.radioactive_decay = true
-
+        if (context.other_card.ability.radioactive_decay) then
             return {
                 dollars = self.config.decay_dollars
             }
